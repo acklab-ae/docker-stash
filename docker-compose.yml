@@ -1,0 +1,28 @@
+version: "3.2"
+
+services:
+  logstash:
+    build:
+      context: logstash/
+      args:
+        ELK_VERSION: "latest"
+    volumes:
+      - type: bind
+        source: ./logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./logstash/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: true
+      - type: bind
+        source: ./logstash/patterns
+        target: /usr/share/logstash/patterns
+        read_only: true
+    ports:
+      - "5140:5140"
+      - "5140:5140/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+
