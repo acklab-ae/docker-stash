@@ -25,5 +25,6 @@ services:
       - "9600:9600"
       - "5044:5044"
       - "5044:5044/udp"
+      - "5045:5045/udp"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
